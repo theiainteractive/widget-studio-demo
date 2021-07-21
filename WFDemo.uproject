@@ -1,0 +1,16 @@
+{
+	"FileVersion": 3,
+	"EngineAssociation": "4.26",
+	"Category": "",
+	"Description": "",
+	"Plugins": [
+		{
+			"Name": "WidgetFrameworkPlugin",
+			"Enabled": true,
+			"MarketplaceURL": "TBD",
+			"SupportedTargetPlatforms": [
+				"Win64"
+			]
+		}
+	]
+}
