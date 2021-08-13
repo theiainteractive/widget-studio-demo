@@ -5,7 +5,7 @@
 	"Description": "",
 	"Plugins": [
 		{
-			"Name": "WidgetFrameworkPlugin",
+			"Name": "WidgetStudio",
 			"Enabled": true,
 			"MarketplaceURL": "TBD",
 			"SupportedTargetPlatforms": [
@@ -18,6 +18,10 @@
 		},
 		{
 			"Name": "SunPosition",
+			"Enabled": true
+		},
+		{
+			"Name": "RemoteSession",
 			"Enabled": true
 		}
 	]
