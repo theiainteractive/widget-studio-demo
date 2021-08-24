@@ -26,7 +26,7 @@ defaults:
 env:
   PACKAGE_NAME:     ${{ github.event.repository.name }}
   S3_BUCKET_NAME:   theia-builds
-  S3_BUILD_TMP:     theia-builds/tmp
+  S3_BUILD_CACHE:   theia-builds/tmp
   BRANCH:           ${{ github.event.inputs.branch || github.event.client_payload.branch || github.ref }}
 
 jobs:
