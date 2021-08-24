@@ -115,7 +115,7 @@ jobs:
   build:
     name:           Build ${{ github.event.repository.name }} for UE_${{ matrix.engine_version }} on ${{ matrix.os }}
     runs-on:        ${{ matrix.os }}
-    needs:          [needs, coalesce-plugins]
+    needs:          [meta, coalesce-plugins]
     strategy:
       fail-fast:    true
       matrix:
