@@ -113,7 +113,7 @@ jobs:
           ENGINE_PLUGIN_PATH="$UE_ROOT_PREFIX/UE_${{ matrix.engine_version }}/Engine/Plugins/WidgetDemo"
           echo "PLUGIN_PATH=$PLUGIN_PATH" >> $GITHUB_ENV
 
-       - name: Configure AWS credentials
+      - name: Configure AWS credentials
         uses: aws-actions/configure-aws-credentials@v1
         with:
           aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
