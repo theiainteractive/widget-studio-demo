@@ -1,0 +1,98 @@
+name: Build (CI/CD)
+
+on:
+  push:
+    branches:
+      - master
+      - release/*
+    paths:
+      - .github/workflows/build.yml
+      - demo/**
+  pull_request:
+    types: [edited, assigned, opened, synchronize, reopened]
+    paths:
+      - .github/workflows/build.yml
+      - demo/**
+  workflow_dispatch:
+    inputs:
+      branch:
+        description: 'Branch to build'     
+        required: true
+        default: 'main'
+
+defaults:
+  run:
+    shell: bash
+
+env:
+  PACKAGE_NAME:     ${{ github.event.repository.name }}
+  S3_BUCKET_NAME:   optim-builds
+  BRANCH:           ${{ github.event.inputs.branch || github.event.client_payload.branch || github.ref }}
+
+jobs:
+  build:
+    name:           Build ${{ github.event.repository.name }} for UE_${{ matrix.engine_version }} on ${{ matrix.os }}
+    runs-on:        ${{ matrix.os }}
+    strategy:
+      fail-fast:    true
+      matrix:
+        os:             [windows-10]
+        engine_version: [4.26]
+    steps:
+      - uses: actions/checkout@v2
+        with: 
+          lfs:        true
+          submodules: true
+          token:      ${{ secrets.REPO_SCOPED_TOKEN }}
+          ref:        ${{ env.BRANCH }}
+
+      - name: Set Environment
+        env:
+          PLATFORM_MATRIX:  ${{ matrix.os }}
+          ENGINE_VERSION:   ${{ matrix.engine_version }}
+          REF:              ${{ env.BRANCH }}
+        run: |
+          source .cicd/platform-meta.sh
+          source .cicd/set-env-plugin.sh
+          source .cicd/paths-plugins.sh
+
+      - name: Build
+        run: |
+          PATH_BUILD="build/UE_${{ matrix.engine_version }}"
+          echo "PATH_BUILD=$PATH_BUILD" >> $GITHUB_ENV
+          if [ ! -d "build" ]; then
+            mkdir "build"
+          fi
+          if [ -d "$PATH_BUILD" ]; then
+            rm -fr "$PATH_BUILD"
+          fi
+          mkdir "$PATH_BUILD"
+          # Copy source to build Directory
+          cp -R project/. $PATH_BUILD
+          # Move plugins to build source
+          mv plugins/UE_${{ matrix.engine_version }}/* "$PATH_BUILD/Plugins/"
+          cd "$PATH_BUILD" || exit
+          ue4 setroot "${{ env.UE_ROOT_PREFIX }}/UE_${{ matrix.engine_version }}"
+          # ue4 build Development Editor -platform="${{ env.PLATFORM_UE }}"
+          ue4 package
+
+      - name: Copy Build Artifact
+        run: |
+          mkdir ${{ env.SIGNATURE_BUILD }}
+          cp -R $PATH_BUILD/dist/* ${{ env.SIGNATURE_BUILD }}/
+
+      - name: Compress action step
+        uses: master-atul/tar-action@v1.0.2
+        id: compress
+        with:
+          command: c
+          files: |
+            ./${{ env.SIGNATURE_BUILD }}/
+          outPath: ./${{ env.FILENAME_BUILD }}
+
+      - name: Backup Build Artifacts to Primitive S3 Artifacts Manager
+        env:
+          DIR: ${{ github.event.repository.name }}
+          FILE_LATEST: ${{ env.FILENAME_BUILD_LATEST }}
+          FILE_PRECISE: ${{ env.FILENAME_BUILD_PRECISE }}
+        run: ./.cicd/s3-backup-artifacts.sh
