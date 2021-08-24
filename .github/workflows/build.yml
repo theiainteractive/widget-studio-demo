@@ -67,7 +67,7 @@ jobs:
           fi
           mkdir "$PATH_BUILD"
           # Copy source to build Directory
-          cp -R project/. $PATH_BUILD
+          cp -R demo/. $PATH_BUILD
           # Move plugins to build source
           mv plugins/UE_${{ matrix.engine_version }}/* "$PATH_BUILD/Plugins/"
           cd "$PATH_BUILD" || exit
