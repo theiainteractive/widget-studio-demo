@@ -68,8 +68,6 @@ jobs:
           mkdir "$PATH_BUILD"
           # Copy source to build Directory
           cp -R demo/. $PATH_BUILD
-          # Move plugins to build source
-          mv plugins/UE_${{ matrix.engine_version }}/* "$PATH_BUILD/Plugins/"
           cd "$PATH_BUILD" || exit
           ue4 setroot "${{ env.UE_ROOT_PREFIX }}/UE_${{ matrix.engine_version }}"
           # ue4 build Development Editor -platform="${{ env.PLATFORM_UE }}"
