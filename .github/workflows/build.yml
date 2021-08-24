@@ -29,10 +29,39 @@ env:
   BRANCH:           ${{ github.event.inputs.branch || github.event.client_payload.branch || github.ref }}
 
 jobs:
+  meta:
+    name:       Set Meta
+    runs-on:    ubuntu-latest
+    outputs:
+      uuid:     ${{ env.UUID }}
+      version:  ${{ steps.versionCheck.outputs.version }}
+    steps:
+      - run: echo "UUID=$(uuidgen)" >> $GITHUB_ENV
+      - uses: actions/checkout@v2
+        with:
+          submodules: true
+          token: ${{ secrets.REPO_SCOPED_TOKEN }}
+          ref: ${{ env.BRANCH }}
+
+      - name: Check version
+        id: versionCheck
+        uses: actions/github-script@v3
+        with:
+          github-token: ${{ github.token }}
+          script: |
+            var version = ""
+            if ("${{ env.TYPE }}" == "release"){
+              const fs = require('fs');
+              version = fs.readFileSync('${{ github.workspace }}/VERSION', 'utf8').replace(/\n$/g, '').replace(' ', '')
+            } else {
+              version = "IS_BUILD_SO_VERSION_NOT_USED"
+            }
+            core.setOutput('version', version)
+
   coalesce-plugins:
     name:         Coalesce ${{ matrix.plugin.name }} for UE_${{matrix.engine_version}} on ${{ matrix.os }}
-    needs:        [meta]
     runs-on:      ubuntu-latest
+    needs:        [meta]
     strategy:
       fail-fast:  true
       matrix:
@@ -86,7 +115,7 @@ jobs:
   build:
     name:           Build ${{ github.event.repository.name }} for UE_${{ matrix.engine_version }} on ${{ matrix.os }}
     runs-on:        ${{ matrix.os }}
-    needs:          [coalesce-plugins]
+    needs:          [needs, coalesce-plugins]
     strategy:
       fail-fast:    true
       matrix:
