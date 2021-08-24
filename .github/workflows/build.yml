@@ -3,8 +3,7 @@ name: Build (CI/CD)
 on:
   push:
     branches:
-      - master
-      - release/*
+      - main
     paths:
       - .github/workflows/build.yml
       - demo/**
