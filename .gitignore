@@ -74,4 +74,4 @@ src/Plugins/*/Intermediate/*
 src/DerivedDataCache/*
 
 # Whitelist GameFeatures
-!src/Plugins/GameFeatures/
+!src/Plugins/GameFeatures/*
