@@ -75,3 +75,6 @@ src/DerivedDataCache/*
 
 # Whitelist GameFeatures
 !src/Plugins/GameFeatures/*
+
+# Whitelist CavrnusCore
+!src/Plugins/CavrnusCore/*
