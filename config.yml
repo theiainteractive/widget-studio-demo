@@ -1,0 +1,24 @@
+name: WidgetStudioDemo
+dependencies:
+  - name: WidgetStudio
+    s3: "s3://theia-artifacts/releases/widget-studio-plugin"
+envs:
+  local:
+    matrix:
+      - ue_version: 4.26
+  development:
+    deploy: "s3://theia-artifacts/builds/widget-studio-demo"
+    matrix:
+      - ue_version: 4.26
+        host_platform: "windows-10"
+        target_platform: "Win64"
+        experimental: false
+        test: false
+  production:
+    deploy: "s3://theia-artifacts/releases/widget-studio-demo"
+    matrix:
+      - ue_version: 4.26
+        host_platform: "windows-10"
+        target_platform: "Win64"
+        experimental: false
+        test: false
