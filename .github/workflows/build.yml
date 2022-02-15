@@ -9,6 +9,8 @@ on:
       - bin/**
       - config.yml
       - VERSION
+    branches:
+      - main
   workflow_dispatch:
     inputs:
       type:
