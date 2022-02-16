@@ -35,4 +35,4 @@ jobs:
       aws_secret_access_key:  ${{ secrets.AWS_SECRET_ACCESS_KEY }}
       slack_webhook_cicd:     ${{ secrets.SLACK_WEBHOOK_CICD }}
     with:
-      skip_asset_upload:      true
+      upload_assets:          false
