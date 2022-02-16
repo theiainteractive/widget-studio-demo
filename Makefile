@@ -28,10 +28,6 @@ package: build ## Forwards to build target
 build: .env clean ## Builds the plugin
 	@(. ./bin/env.sh; ./bin/build.sh)
 
-.PHONY: dependencies
-dependencies: ## Grabs dependencies as defined in the config yaml and installs them
-	@(. ./bin/env.sh; ./bin/dependencies.sh)
-
 .PHONY: test
 test: .env ## Runs tests
 	@if [[ "${nobuild}" == "true" ]]; then (. ./bin/env.sh; ./bin/test.sh); else (. ./bin/env.sh; ./bin/clean.sh; ./bin/build.sh; ./bin/test.sh) fi
