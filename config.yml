@@ -1,7 +1,11 @@
 name: WidgetStudioDemo
-dependencies:
-  - name: WidgetStudio
-    s3: "s3://theia-artifacts/releases/widget-studio-plugin"
+build_settings:
+  upload_assets:
+    github: false
+    aws: true
+  dependencies:
+    - name: WidgetStudio
+      s3: "s3://theia-artifacts/releases/widget-studio-plugin"
 envs:
   local:
     matrix:

@@ -30,9 +30,7 @@ jobs:
   tbd:
     uses: theiainteractive/actions/.github/workflows/build.yml@v2
     secrets:
-      token:                  ${{ secrets.REPO_SCOPED_TOKEN }}
-      aws_access_key_id:      ${{ secrets.AWS_ACCESS_KEY_ID }}
-      aws_secret_access_key:  ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-      slack_webhook_cicd:     ${{ secrets.SLACK_WEBHOOK_CICD }}
-    with:
-      upload_assets:          false
+      token:                  ${{ secrets.REPO_SCOPED_TOKEN_PUBLIC }}
+      aws_access_key_id:      ${{ secrets.AWS_ACCESS_KEY_ID_PUBLIC }}
+      aws_secret_access_key:  ${{ secrets.AWS_SECRET_ACCESS_KEY_PUBLIC }}
+      slack_webhook_cicd:     ${{ secrets.SLACK_WEBHOOK_CICD_PUBLIC }}
