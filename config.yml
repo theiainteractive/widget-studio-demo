@@ -10,6 +10,8 @@ envs:
   local:
     matrix:
       - ue_version: 4.26
+      - ue_version: 4.27
+      - ue_version: "5.0"
   development:
     deploy: "s3://theia-artifacts/builds/widget-studio-demo"
     matrix:
@@ -18,6 +20,16 @@ envs:
         target_platform: "Win64"
         experimental: false
         test: false
+      - ue_version: 4.27
+        host_platform: "windows-10"
+        target_platform: "Win64"
+        experimental: false
+        test: false
+      - ue_version: "5.0"
+        host_platform: "windows-10"
+        target_platform: "Win64"
+        experimental: true
+        test: false
   production:
     deploy: "s3://theia-artifacts/releases/widget-studio-demo"
     matrix:
@@ -25,4 +37,14 @@ envs:
         host_platform: "windows-10"
         target_platform: "Win64"
         experimental: false
+        test: false
+      - ue_version: 4.27
+        host_platform: "windows-10"
+        target_platform: "Win64"
+        experimental: false
+        test: false
+      - ue_version: "5.0"
+        host_platform: "windows-10"
+        target_platform: "Win64"
+        experimental: true
         test: false
