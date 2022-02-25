@@ -5,7 +5,7 @@ build_settings:
     aws: true
   dependencies:
     - name: WidgetStudio
-      s3: "s3://theia-artifacts/releases/widget-studio-plugin"
+      s3: "s3://theia-artifacts/builds/widget-studio-plugin"
 envs:
   local:
     matrix:
