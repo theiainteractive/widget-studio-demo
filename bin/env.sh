@@ -106,6 +106,7 @@ if [[ $* == *"-i"* ]]; then
     echo "::set-output name=PLATFORM_PYTHON::$PLATFORM_PYTHON"
     echo "::set-output name=PLATFORM_HOST::$PLATFORM_HOST"
     echo "::set-output name=ENVIRONMENT::$ENVIRONMENT"
+    echo "::set-output name=VERSION_UE::$VERSION_UE"
     echo "::set-output name=VERSION_BUILD::$VERSION_BUILD"
     echo "::set-output name=PACKAGE_NAME::$PACKAGE_NAME"
     echo "::set-output name=BRANCH::$BRANCH"
