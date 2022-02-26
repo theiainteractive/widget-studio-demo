@@ -19,12 +19,12 @@ envs:
       - ue_version: 4.26
         host_platform: "windows-10"
         target_platform: "Win64"
-        experimental: false
+        experimental: true
         test: false
       - ue_version: 4.27
         host_platform: "windows-10"
         target_platform: "Win64"
-        experimental: false
+        experimental: true
         test: false
       - ue_version: "5.0"
         host_platform: "windows-10"
@@ -35,12 +35,12 @@ envs:
       - ue_version: 4.26
         host_platform: "windows-10"
         target_platform: Android
-        experimental: false
+        experimental: true
         test: false
       - ue_version: 4.27
         host_platform: "windows-10"
         target_platform: Android
-        experimental: false
+        experimental: true
         test: false
       - ue_version: "5.0"
         host_platform: "windows-10"
@@ -51,12 +51,12 @@ envs:
       - ue_version: 4.26
         host_platform: macos-monterey
         target_platform: Mac
-        experimental: false
+        experimental: true
         test: false
       - ue_version: 4.27
         host_platform: macos-monterey
         target_platform: Mac
-        experimental: false
+        experimental: true
         test: false
       - ue_version: "5.0"
         host_platform: macos-monterey
@@ -67,12 +67,12 @@ envs:
       - ue_version: 4.26
         host_platform: macos-monterey
         target_platform: IOS
-        experimental: false
+        experimental: true
         test: false
       - ue_version: 4.27
         host_platform: macos-monterey
         target_platform: IOS
-        experimental: false
+        experimental: true
         test: false
       - ue_version: "5.0"
         host_platform: macos-monterey
@@ -86,12 +86,12 @@ envs:
       - ue_version: 4.26
         host_platform: "windows-10"
         target_platform: "Win64"
-        experimental: false
+        experimental: true
         test: false
       - ue_version: 4.27
         host_platform: "windows-10"
         target_platform: "Win64"
-        experimental: false
+        experimental: true
         test: false
       - ue_version: "5.0"
         host_platform: "windows-10"
@@ -102,12 +102,12 @@ envs:
       - ue_version: 4.26
         host_platform: "windows-10"
         target_platform: Android
-        experimental: false
+        experimental: true
         test: false
       - ue_version: 4.27
         host_platform: "windows-10"
         target_platform: Android
-        experimental: false
+        experimental: true
         test: false
       - ue_version: "5.0"
         host_platform: "windows-10"
