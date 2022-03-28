@@ -73,8 +73,6 @@ src/Plugins/*/Intermediate/*
 # Cache files for the editor to use
 src/DerivedDataCache/*
 
-# Whitelist GameFeatures
-!src/Plugins/GameFeatures/*
-
 # Blacklist
 src/Packages/*
+src/Plugins/*
