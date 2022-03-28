@@ -1,0 +1,36 @@
+name: Test, Build, Deploy (CI/CD)
+
+on:
+  push:
+    paths: 
+      - src/**
+      - .github/workflows/**
+      - Makefile
+      - bin/**
+      - config.yml
+      - VERSION
+    branches:
+      - main
+  workflow_dispatch:
+    inputs:
+      type:
+        description: build or release
+        required: true
+        default: build
+      version:
+        description: x.x.x
+        required: true
+        default: 0.1.0
+
+defaults:
+  run:
+    shell: bash
+
+jobs:
+  tbd:
+    uses: theiainteractive/actions/.github/workflows/build.yml@v2
+    secrets:
+      token:                  ${{ secrets.REPO_SCOPED_TOKEN_PUBLIC }}
+      aws_access_key_id:      ${{ secrets.AWS_ACCESS_KEY_ID }}
+      aws_secret_access_key:  ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+      slack_webhook_cicd:     ${{ secrets.SLACK_WEBHOOK_CICD }}

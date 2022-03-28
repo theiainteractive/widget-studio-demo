@@ -1,0 +1,50 @@
+username: GitHub Actions
+icon_url: https://octodex.github.com/images/total-eclipse-of-the-octocat.jpg
+
+title: "{{repositoryName}}"
+title_link: "{{repositoryUrl}}"
+
+text: ":theia: - {{env.commit}} ({{ref}})"
+
+fallback: |-
+  [GitHub] {{workflow}} #{{runNumber}} {{jobName}} is {{jobStatus}}
+
+fields:
+  # - title: Matrix Targets
+  #   value: "{{#with env.matrix.include as | matrix |}}{{#each matrix}} UE{{this.ue_version}} - {{this.target_platform}} \n{{/each}}{{/with}}"
+  #   short: false
+  - title: Workflow
+    value: "<{{workflowUrl}}|{{workflow}}>"
+    short: true
+  - title: Git Ref
+    value: "{{ref}} ({{refType}})"
+    short: true
+  - title: Run ID
+    value: |-
+      <{{workflowRunUrl}}|{{runId}}>
+    short: true
+  - title: Run Number
+    value: "{{runNumber}}"
+    short: true
+  - title: Actor
+    value: "{{actor}}"
+    short: true
+  - title: Commit
+    value: "{{shortSha}}"
+    short: true
+
+footer: >-
+  <{{repositoryUrl}}|{{repositoryName}}> {{workflow}} #{{runNumber}}
+
+colors:
+  success: '#7DF591'
+  failure: '#884EA0'
+  cancelled: '#A569BD'
+  default: '#7D3C98'
+
+icons:
+  success: ':white_check_mark:'
+  failure: ':grimacing:'
+  cancelled: ':x:'
+  skipped: ':heavy_minus_sign:'
+  default: ':interrobang:'

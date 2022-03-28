@@ -1,3 +1,0 @@
-[submodule ".cicd"]
-	path = .cicd
-	url = https://github.com/theiainteractive/cicd.git
