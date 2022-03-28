@@ -78,5 +78,7 @@ src/Plugins/*/Intermediate/*
 src/DerivedDataCache/*
 
 # Blacklist
-src/Packages/*
-src/Plugins/*
+src/*/Packages/*
+src/*/Plugins/*
+src/*/Intermediate/*
+src/*/Saved/*
