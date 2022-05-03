@@ -12,6 +12,10 @@ mkdir -p "$PATH_BUILD"
 cp -r src/$PACKAGE_NAME/. "$PATH_BUILD" || exit 1
 rm -rf "$PATH_BUILD/Plugins/UE4GitPlugin" || exit 2
 
+if [[ $PLATFORM_UE == "IOS" || $PLATFORM_UE == "Android" ]]; then
+    sed -i "s|GameDefaultMap=.*|GameDefaultMap=/Game/WidgetStudioDemo/Maps/WidgetStudioDemo_Mobile.WidgetStudioDemo_Mobile|g" "$PATH_BUILD/Config/DefaultEngine.ini"
+fi
+
 # Build
 pushd "$PATH_BUILD" || exit 3
     if [[ $* == *-b* ]]; then
