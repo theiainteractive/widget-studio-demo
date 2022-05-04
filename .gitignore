@@ -82,3 +82,4 @@ src/*/Packages/*
 src/*/Plugins/*
 src/*/Intermediate/*
 src/*/Saved/*
+src/*/Binaries/*
