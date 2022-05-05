@@ -6,6 +6,7 @@ build_settings:
   dependencies:
     - name: WidgetStudio
       s3: "s3://theia-artifacts/builds/widget-studio-plugin"
+      plugin_type: Marketplace
 envs:
   local:
     matrix:
