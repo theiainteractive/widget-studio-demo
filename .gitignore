@@ -51,6 +51,7 @@ src/SourceArt/**/*.tga
 
 # Binary Files
 src/Binaries/*
+src/*/Binaries
 # src/Plugins/*/Binaries/*
 
 # Builds
