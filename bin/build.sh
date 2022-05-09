@@ -51,6 +51,7 @@ mkdir -p "$PATH_ARTIFACT"
 if [[ $PLATFORM_UE_TARGET == "Android" ]]; then
     for artifact in "$PATH_BUILD/dist/*.apk"; do
       echo mv -- "$artifact" "$PATH_ARTIFACT/${artifact%.apk}_$VERSION_BUILD.apk" || exit 6
+      break
     done
 else
     # Add version to artifact
