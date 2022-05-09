@@ -46,8 +46,15 @@ pushd "$PATH_BUILD/dist"
     done
 popd
 
+echo "📁  Moving artifact to $PATH_ARTIFACT..."
 mkdir -p "$PATH_ARTIFACT"
-mv "$PATH_BUILD/dist/$PACKAGE_NAME" "$PATH_ARTIFACT" || exit 6
+if [[ $PLATFORM_UE_TARGET == "Android" ]]; then
+    for artifact in "$PATH_BUILD/dist/*.apk"; do
+      echo mv -- "$artifact" "$PATH_ARTIFACT/${artifact%.apk}_$VERSION_BUILD.apk" || exit 6
+    done
+else
+    echo mv "$PATH_BUILD/dist/$PACKAGE_NAME" "$PATH_ARTIFACT" || exit 6
+fi
 
 # Add version to artifact
 echo "📁  Adding version $VERSION_BUILD to artifact..."
