@@ -53,11 +53,10 @@ if [[ $PLATFORM_UE_TARGET == "Android" ]]; then
       echo mv -- "$artifact" "$PATH_ARTIFACT/${artifact%.apk}_$VERSION_BUILD.apk" || exit 6
     done
 else
+    # Add version to artifact
+    echo "📁  Adding version $VERSION_BUILD to artifact..."
+    echo "$VERSION_BUILD" > "$PATH_ARTIFACT/$PACKAGE_NAME/VERSION" || exit 7
     echo mv "$PATH_BUILD/dist/$PACKAGE_NAME" "$PATH_ARTIFACT" || exit 6
 fi
-
-# Add version to artifact
-echo "📁  Adding version $VERSION_BUILD to artifact..."
-echo "$VERSION_BUILD" > "$PATH_ARTIFACT/$PACKAGE_NAME/VERSION" || exit 7
 
 echo "✔️   Build Successful"
