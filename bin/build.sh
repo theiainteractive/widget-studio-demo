@@ -37,26 +37,25 @@ if [ ! -d "$PATH_BUILD/dist" ]; then
     exit 5
 fi
 
-# Move archive to the archive directory as ue4cli's `-archivedirectory` option is sometimes ignored
-echo "📁  Renaming artifact folder..."
-pushd "$PATH_BUILD/dist"
-    for DIR in */; do
-        mv "$DIR" "$PACKAGE_NAME"
-        break
-    done
-popd
-
 echo "📁  Moving artifact to $PATH_ARTIFACT..."
 mkdir -p "$PATH_ARTIFACT"
+# If building for android, deal with APK
 if [[ $PLATFORM_UE == "Android" ]]; then
     for artifact in "$PATH_BUILD/dist/*.apk"; do
       mv $artifact $PATH_ARTIFACT/$(basename $artifact .apk)_$VERSION_BUILD.apk || exit 6
       break
     done
+# Else move artifact to the expected artifact directory (ue4cli's `-archivedirectory` option is sometimes ignored)
+# and inject the VERSION file
 else
-    mv "$PATH_BUILD/dist/$PACKAGE_NAME" "$PATH_ARTIFACT" || exit 6
-    echo "📁  Adding version $VERSION_BUILD to artifact..."
-    echo "$VERSION_BUILD" > "$PATH_ARTIFACT/$PACKAGE_NAME/VERSION" || exit 7
+    pushd "$PATH_BUILD/dist"
+        for DIR in */; do
+            mv "$DIR" "$PATH_ARTIFACT" || exit 6
+            echo "📁  Adding version $VERSION_BUILD to artifact..."
+            echo "$VERSION_BUILD" > "$PATH_ARTIFACT/$PACKAGE_NAME/VERSION" || exit 7
+            break
+        done
+    popd
 fi
 
 echo "✔️   Build Successful"
