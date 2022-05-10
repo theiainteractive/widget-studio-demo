@@ -48,7 +48,7 @@ popd
 
 echo "📁  Moving artifact to $PATH_ARTIFACT..."
 mkdir -p "$PATH_ARTIFACT"
-if [[ $PLATFORM_UE_TARGET == "Android" ]]; then
+if [[ $PLATFORM_UE == "Android" ]]; then
     for artifact in "$PATH_BUILD/dist/*.apk"; do
       echo mv -- "$artifact" "$PATH_ARTIFACT/${artifact%.apk}_$VERSION_BUILD.apk" || exit 6
       break
