@@ -54,10 +54,10 @@ if [[ $PLATFORM_UE_TARGET == "Android" ]]; then
       break
     done
 else
-    # Add version to artifact
+    echo mv "$PATH_BUILD/dist/$PACKAGE_NAME" "$PATH_ARTIFACT" || exit 6
+    
     echo "📁  Adding version $VERSION_BUILD to artifact..."
     echo "$VERSION_BUILD" > "$PATH_ARTIFACT/$PACKAGE_NAME/VERSION" || exit 7
-    echo mv "$PATH_BUILD/dist/$PACKAGE_NAME" "$PATH_ARTIFACT" || exit 6
 fi
 
 echo "✔️   Build Successful"
