@@ -41,7 +41,12 @@ echo "📁  Moving artifact to $PATH_ARTIFACT..."
 mkdir -p "$PATH_ARTIFACT"
 # If building for android, deal with APK
 if [[ $PLATFORM_UE == "Android" ]]; then
-    for artifact in "$PATH_BUILD/dist/*.apk"; do
+    if [[ $VERSION_UE == "4.26" || $VERSION_UE == "4.27" ]]; then
+        PATH_BUILD_ARTIFACT="$PATH_BUILD/dist/Android/*.apk"
+    else
+        PATH_BUILD_ARTIFACT="$PATH_BUILD/dist/*.apk"
+    fi
+    for artifact in "$PATH_BUILD_ARTIFACT"; do
       mv $artifact $PATH_ARTIFACT/$(basename $artifact .apk)_$VERSION_BUILD.apk || exit 6
       break
     done
