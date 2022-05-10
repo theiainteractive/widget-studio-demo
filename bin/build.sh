@@ -50,12 +50,12 @@ if [[ $PLATFORM_UE == "Android" ]]; then
 else
     pushd "$PATH_BUILD/dist"
         for DIR in */; do
-            mv "$DIR" "$PATH_ARTIFACT" || exit 6
-            echo "📁  Adding version $VERSION_BUILD to artifact..."
-            echo "$VERSION_BUILD" > "$PATH_ARTIFACT/$PACKAGE_NAME/VERSION" || exit 7
+            mv "$DIR" "$PATH_ARTIFACT/$PACKAGE_NAME" || exit 6
             break
         done
     popd
+    echo "📁  Adding version $VERSION_BUILD to artifact..."
+    echo "$VERSION_BUILD" > "$PATH_ARTIFACT/$PACKAGE_NAME/VERSION" || exit 7
 fi
 
 echo "✔️   Build Successful"
